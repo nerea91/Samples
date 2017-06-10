@@ -1,0 +1,89 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Charts</title>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi?autoload={modules:[{name:'visualization', version:1, packages:['corechart']}]}&ext=.js"></script>
+  </head>
+  <body>
+
+      <div id="chart"></div>
+      <div id="chart2"></div>
+      <script>
+      $(document).ready(function() {
+
+      		drawChart1();
+            drawChart2();
+      });
+      function drawChart1()
+      {
+          var data = google.visualization.arrayToDataTable([
+              ['Salas','Ocupado', {role:'annotation'}, {type: 'string', role: 'tooltip', 'p': {'html': true} },'Libre', {type: 'string', role: 'tooltip', 'p': {'html': true} } ],
+
+                 ['Sala1', 66.66, 20, '<b>Sala1:</b> 20/30', 33.34, '<b>Sala1:</b> 10/30'],
+                 ['Sala2', 50, 50, '<b>Sala2:</b> 25/50', 50, '<b>Sala2:</b> 25/50'],
+                 ['Sala3', 92.5, 37, '<b>Sala3:</b> 37/40', 7.5, '<b>Sala3:</b> 3/50'],
+
+            ]);
+
+            var options = {
+              width: window.innerWidth,
+              height: 500,
+              legend: { position: 'top', maxLines: 3 },
+              bar: { groupWidth: '75%' },
+              isStacked: 'percent',
+              tooltip: {isHtml: true},
+              colors: ['#3366cc', '#00b300']
+            };
+          var chart = new google.visualization.BarChart(
+          document.getElementById('chart'));
+
+         chart.draw(data, options);
+      }
+
+      function drawChart2()
+      {
+          var data = google.visualization.arrayToDataTable([
+
+  			['Hora', 'Datos',  { role: 'style' },'Datos2', { role: 'style' }],
+
+  			['07:00',  10, "color: red",5,"color: green"],
+            ['08:00',  15, "color: red",20,"color: green"],
+            ['09:00',  20, "color: red",15,"color: green"],
+            ['10:00',  20, "color: red",15,"color: green"],
+            ['11:00',  20, "color: red",15,"color: green"],
+            ['12:00',  20, "color: red",15,"color: green"],
+            ['13:00',  20, "color: red",15,"color: green"],
+            ['15:00',  30, "color: orange",20,"color: black"],
+            ['16:00',  30, "color: orange",20,"color: black"],
+            ['17:00',  30, "color: orange",20,"color: black"],
+            ['18:00',  20, "color: red",15,"color: green"],
+            ['19:00',  20, "color: red",15,"color: green"],
+            ['20:00',  15, "color: red",10,"color: green"],
+  		]);
+
+  		var options = {
+  			title: 'Gráfica',
+  			curveType: 'function',
+  			legend: {position: 'bottom'},
+  			width: window.innerWidth,
+  			height: 500,
+  			vAxis: {
+  				gridlines: { count: 10 },
+  				viewWindow:{min: 0}
+  			},
+  			series: {
+  				0:{targetAxisIndex: 0},
+  				1:{targetAxisIndex: 1},
+  			}
+  		};
+
+  		var chart = new google.visualization.LineChart(document.getElementById('chart2'));
+  		chart.draw(data, options);
+      }
+      </script>
+  </body>
+</html>
